@@ -31,8 +31,8 @@ public class ProductApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
         var response = await _client.PostAsync("/api/products", content);
 
         // Assert
-        response.EnsureSuccessStatusCode(); // Status Code 200-299
-        var responseString = await response.Content.ReadAsStringAsync();
+        response.EnsureSuccessStatusCode();
+        Assert.Equal(201, (int)response.StatusCode);
     }
     [Fact]
     public async Task GetAllProducts_ShouldReturnAllProducts()

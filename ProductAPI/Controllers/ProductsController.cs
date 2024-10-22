@@ -26,7 +26,7 @@ public class ProductsController(ISender sender) : ControllerBase
     }
 
     [HttpPost("")]
-    [ProducesResponseType<ServiceResult>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ServiceResult>(StatusCodes.Status201Created)]
     [ProducesResponseType<ServiceResult>(StatusCodes.Status400BadRequest)]
     [ProducesResponseType<ServiceResult>(StatusCodes.Status404NotFound)]
     [ProducesResponseType<ServiceResult>(StatusCodes.Status500InternalServerError)]
@@ -37,7 +37,7 @@ public class ProductsController(ISender sender) : ControllerBase
         if (result.Error is not null)
             return StatusCode(result.Error.Code, result);
 
-        return result;
+        return StatusCode(result.Code, result);
     }
 
     [HttpPut("{id:int}")]

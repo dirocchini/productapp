@@ -8,7 +8,11 @@ public class ServiceResult<T> : ServiceResult
     {
         Data = data;
     }
-
+    public ServiceResult(T data, int code)
+    {
+        Data = data;
+        base.Code = code;
+    }
 
     public ServiceResult(T data, ServiceError error) : base(error)
     {
@@ -24,6 +28,8 @@ public class ServiceResult
 
     public ServiceError Error { get; set; }
 
+    public int Code { get; set; }
+
     public ServiceResult(ServiceError error)
     {
         if (error == null)
@@ -34,7 +40,14 @@ public class ServiceResult
         Error = error;
     }
 
-    public ServiceResult() { }
+    public ServiceResult()
+    {
+    }
+
+    public ServiceResult(int code)
+    {
+        Code = code;
+    }
 
     #region Helper Methods
 
@@ -55,5 +68,9 @@ public class ServiceResult
         return new ServiceResult<T>(data);
     }
 
+    public static ServiceResult<T> Success<T>(T data, int code)
+    {
+        return new ServiceResult<T>(data, code);
+    }
     #endregion
 }

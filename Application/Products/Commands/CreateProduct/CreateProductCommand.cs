@@ -4,6 +4,7 @@ using Application.Common.Models;
 using Application.Events;
 using Domain.Entity.Database;
 using Domain.Entity.Repositories;
+using System.Net;
 
 namespace Application.Products.Commands.CreateProduct;
 
@@ -39,7 +40,8 @@ public class CreateProductCommandHandler(
 
         await productEventPublisher.PublishEvent();
 
-        return ServiceResult.Success("");
+        var result = ServiceResult.Success("", (int)HttpStatusCode.Created);
+        return result;
     }
 
     private async Task<dynamic> AddCategories(CreateProductCommand request, ProductEntity product, CancellationToken cancellationToken)
