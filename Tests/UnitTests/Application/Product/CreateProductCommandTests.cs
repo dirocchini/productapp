@@ -6,7 +6,7 @@ using Domain.Entity.Repositories;
 using Domain.Interfaces.Listeners;
 using Moq;
 
-namespace UnitTests.Application;
+namespace UnitTests.Application.Product;
 
 public class CreateProductCommandTests
 {
@@ -37,7 +37,7 @@ public class CreateProductCommandTests
 
         //Assert
         Assert.NotNull(result);
-        Assert.IsType<ServiceResult<String>>(result);
+        Assert.IsType<ServiceResult<string>>(result);
         Assert.True(result.Succeeded);
     }
 }

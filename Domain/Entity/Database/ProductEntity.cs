@@ -28,13 +28,13 @@ public class ProductEntity : BaseEntity
         ProductCategories ??= [];
 
         foreach (var category in categories)
-            ProductCategories.Add(new ProductCategory() { CategoryId = category.Id });
+            AddCategory(category);
     }
 
     public void AddCategory(CategoryEntity category)
     {
         ProductCategories ??= [];
-        var categoryExists = ProductCategories.FirstOrDefault(c => c.Category.Name == category.Name);
+        var categoryExists = ProductCategories.FirstOrDefault(c => c.CategoryId == category.Id);
 
         if (categoryExists is null)
             ProductCategories.Add(new ProductCategory() { CategoryId = category.Id });

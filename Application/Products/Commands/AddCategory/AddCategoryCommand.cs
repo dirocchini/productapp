@@ -26,7 +26,7 @@ public class AddCategoryCommandHandler(IProductRepository productRepository, ICa
             return NotFound("Category", $"Category not found with name {request.CategoryName}");
 
         product.AddCategory(category);
-        productRepository.SaveChangesAsync(cancellationToken);
+        await productRepository.SaveChangesAsync(cancellationToken);
 
         return ServiceResult.Success("");
     }

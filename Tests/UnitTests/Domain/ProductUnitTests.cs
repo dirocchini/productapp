@@ -58,5 +58,80 @@ public class ProductUnitTests
         //Assert
         Assert.False(validation.IsValid);
     }
+    [Fact]
+    public void Product_AddCategories_ShouldAdd()
+    {
+        //Arrange
+        var categories = new List<CategoryEntity>
+        {
+            new CategoryEntity() { Id = 1, Name = "Category 1" },
+            new CategoryEntity() { Id = 2, Name = "Category 2" }
+        };
 
+        var product = new ProductEntity("Valid Product Name", 123.4m);
+
+        //Act
+        product.AddCategories(categories);
+
+        //Assert
+        Assert.Equal(2m, product.ProductCategories.Count(), 0);
+    }
+    [Fact]
+    public void Product_AddCategory_ShouldAdd()
+    {
+        //Arrange
+        var category = new CategoryEntity() { Id = 1, Name = "Category 1" };
+        var product = new ProductEntity("Valid Product Name", 123.4m);
+
+        //Act
+        product.AddCategory(category);
+
+        //Assert
+        Assert.Equal(1m, product.ProductCategories.Count(), 0);
+    }
+    [Fact]
+    public void Product_AddCategoryWithItemsAdded_ShouldAdd()
+    {
+        //Arrange
+        var product = new ProductEntity("Valid Product Name", 123.4m);
+    
+        var category = new CategoryEntity() { Id = 1, Name = "Category 1" };
+        var categories = new List<CategoryEntity>
+        {
+            new CategoryEntity() { Id = 1, Name = "Category 1" },
+            new CategoryEntity() { Id = 2, Name = "Category 2" }
+        };
+
+
+        //Act
+        product.AddCategories(categories);
+        product.AddCategory(category);
+
+        //Assert
+        Assert.Equal(2m, product.ProductCategories.Count(), 0);
+    }
+    [Fact]
+    public void Product_AddCategoriesAlreadyAdded_ShouldAdd()
+    {
+        //Arrange
+        var product = new ProductEntity("Valid Product Name", 123.4m);
+
+        var categories = new List<CategoryEntity>
+        {
+            new CategoryEntity() { Id = 1, Name = "Category 1" },
+            new CategoryEntity() { Id = 2, Name = "Category 2" }
+        };
+        var categories2 = new List<CategoryEntity>
+        {
+            new CategoryEntity() { Id = 1, Name = "Category 1" },
+            new CategoryEntity() { Id = 3, Name = "Category 3" }
+        };
+
+        //Act
+        product.AddCategories(categories);
+        product.AddCategories(categories2);
+
+        //Assert
+        Assert.Equal(3m, product.ProductCategories.Count(), 0);
+    }
 }
