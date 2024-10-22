@@ -4,9 +4,9 @@ using Domain.InfraSqlServer.Persistense;
 using Microsoft.EntityFrameworkCore;
 using ProductAPI.Filter;
 
-internal class Program
+public class Program
 {
-    private static void Main(string[] args)
+    public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 

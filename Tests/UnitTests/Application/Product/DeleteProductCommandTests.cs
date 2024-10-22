@@ -2,9 +2,7 @@
 using Domain.Entity.Database;
 using Domain.Entity.Repositories;
 using Moq;
-using NuGet.Frameworks;
 using System.Net;
-using System.Runtime.CompilerServices;
 
 namespace UnitTests.Application.Product;
 
