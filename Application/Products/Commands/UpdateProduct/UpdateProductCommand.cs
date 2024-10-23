@@ -13,8 +13,8 @@ namespace Application.Products.Commands.UpdateProduct
         [JsonIgnore]
         public int ProductId { get; set; }
 
-        public string Name { get; set; }
-        public decimal Value { get; set; }
+        public string? Name { get; set; }
+        public decimal? Value { get; set; }
     }
 
     public class UpdateProductCommandHandler(IProductRepository productRepository, IMapper _mapper) : BaseHandler, IRequestHandlerWrapper<UpdateProductCommand, ProductViewModel>
@@ -26,11 +26,11 @@ namespace Application.Products.Commands.UpdateProduct
             if (product == null)
                 return NotFound<ProductViewModel>("Product", request.ProductId, null);
 
-            if (request.Name != product.Name)
+            if (request.Name is not null && request.Name != product.Name)
                 product.Name = request.Name;
 
-            if (request.Value != product.Value)
-                product.Value = request.Value;
+            if (request.Value is not null && request.Value != product.Value)
+                product.Value = request.Value.Value;
 
             var validations = product.Validate();
 

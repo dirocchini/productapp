@@ -44,7 +44,7 @@ public class ProductApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
         var response = await _client.GetAsync("/api/products");
 
         // Assert
-        response.EnsureSuccessStatusCode(); // Status Code 200-299
+        response.EnsureSuccessStatusCode(); 
 
     }
     [Fact]

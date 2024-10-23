@@ -17,7 +17,7 @@ public class AddCategoryCommandHandler(IProductRepository productRepository, ICa
 {
     public async Task<ServiceResult> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
     {
-        var product = await productRepository.GetByIdAsync(request.ProductId, cancellationToken);
+        var product = await productRepository.GetByIdWithCategories(request.ProductId, cancellationToken);
         if (product is null)
             return NotFound<ProductEntity>("Product", request.ProductId, null);
 
